@@ -1332,15 +1332,6 @@ static void __init sound_init(void)
 	gpio_request(GPIO_MICBIAS_EN, "micbias_enable");
 }
 
-#ifdef CONFIG_S5PC110_DEV_ONENAND
-static void __init onenand_init()
-{
-	struct clk *clk = clk_get(NULL, "onenand");
-	BUG_ON(!clk);
-	clk_enable(clk);
-}
-#endif
-
 static void atlas_pm_restart(char mode, const char *cmd)
 {
 	//flush_console();
@@ -1504,7 +1495,6 @@ static void __init atlas_machine_init(void)
 	atlas_wifi_init();
 
 #ifdef CONFIG_S5PC110_DEV_ONENAND
-	s5pc110_onenand_set_platdata(&onenand_pdata);
 	onenand_init();
 #endif
 

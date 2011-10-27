@@ -25,9 +25,9 @@ extern enum cable_type_t set_cable_status;
 void max8998_init(void);
 
 #ifdef __LINUX_MTD_ONENAND_H
-extern struct onenand_platform_data onenand_pdata;
 void s5pc110_onenand_set_platdata(struct onenand_platform_data *pdata);
 #endif
+void onenand_init();
 
 extern struct class *sec_class;
 void fsa9480_init(void);

@@ -20,6 +20,9 @@
 #include <linux/mtd/partitions.h>
 #include <linux/mtd/onenand.h>
 
+#include "atlas.h"
+
+
 static struct mtd_partition atlas_partition_info[] = {
 
    /*This is partition layout from the oneNAND it SHOULD match the pitfile on the second page of the NAND.
@@ -87,7 +90,12 @@ static struct mtd_partition atlas_partition_info[] = {
 	},
 };
 
-struct onenand_platform_data onenand_pdata = {
+static struct onenand_platform_data onenand_pdata = {
 	.parts		= atlas_partition_info,
 	.nr_parts	= ARRAY_SIZE(atlas_partition_info),
 };
+
+void onenand_init()
+{
+	s5pc110_onenand_set_platdata(&onenand_pdata);
+}
