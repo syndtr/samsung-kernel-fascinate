@@ -1030,6 +1030,7 @@ static int s3c_onenand_probe(struct platform_device *pdev)
 	if (s3c_read_reg(MEM_CFG_OFFSET) & ONENAND_SYS_CFG1_SYNC_READ)
 		dev_info(&onenand->pdev->dev, "OneNAND Sync. Burst Read enabled\n");
 
+#if 0
 #ifdef CONFIG_MTD_PARTITIONS
 #ifdef CONFIG_MTD_CMDLINE_PARTS
 	err = parse_mtd_partitions(mtd, part_probes, &onenand->parts, 0);
@@ -1050,19 +1051,24 @@ static int s3c_onenand_probe(struct platform_device *pdev)
 	else
 #endif
 		err = add_mtd_device(mtd);
+#endif
 
 
-/*
 #ifdef CONFIG_MTD_PARTITIONS
+#ifdef CONFIG_MTD_CMDLINE_PARTS
 	err = parse_mtd_partitions(mtd, part_probes, &onenand->parts, 0);
 	if (err > 0)
 		add_mtd_partitions(mtd, onenand->parts, err);
-	else if (err <= 0 && pdata && pdata->parts)
+	else
+#else
+	err = 0;
+#endif
+	if (err <= 0 && pdata && pdata->parts)
 		add_mtd_partitions(mtd, pdata->parts, pdata->nr_parts);
 	else
 #endif
 		err = add_mtd_device(mtd);
-*/
+
 
 	platform_set_drvdata(pdev, mtd);
 
