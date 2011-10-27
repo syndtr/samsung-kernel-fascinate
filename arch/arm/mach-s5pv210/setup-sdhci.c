@@ -211,7 +211,7 @@ void s5pv210_setup_sdhci_cfg_card(struct platform_device *dev,
 		if ((ios->clock > range_start) && (ios->clock < range_end))
 			ctrl3 = S3C_SDHCI_CTRL3_FCSELTX_BASIC |
 				S3C_SDHCI_CTRL3_FCSELRX_BASIC;
-		else if (machine_is_atlas() ||
+		else if (
 			(machine_is_herring() && herring_is_cdma_wimax_dev() &&
 								dev->id == 2)) {
 			ctrl3 = S3C_SDHCI_CTRL3_FCSELTX_BASIC;
@@ -223,7 +223,6 @@ void s5pv210_setup_sdhci_cfg_card(struct platform_device *dev,
 			ctrl3 = S3C_SDHCI_CTRL3_FCSELTX_BASIC |
 				S3C_SDHCI_CTRL3_FCSELRX_INVERT;
 	}
-
 
 	writel(ctrl2, r + S3C_SDHCI_CONTROL2);
 	writel(ctrl3, r + S3C_SDHCI_CONTROL3);
@@ -321,6 +320,10 @@ static struct s3c_sdhci_platdata hsmmc0_platdata = {
 #endif
 };
 
+#if defined(CONFIG_S3C_DEV_HSMMC1)
+static struct s3c_sdhci_platdata hsmmc1_platdata = { 0 };
+#endif
+
 #if defined(CONFIG_S3C_DEV_HSMMC2)
 static struct s3c_sdhci_platdata hsmmc2_platdata = {
 #if defined(CONFIG_S5PV210_SD_CH2_8BIT)
@@ -338,6 +341,11 @@ void s3c_sdhci_set_platdata(void)
 {
 #if defined(CONFIG_S3C_DEV_HSMMC)
 	s3c_sdhci0_set_platdata(&hsmmc0_platdata);
+#endif
+#if defined(CONFIG_S3C_DEV_HSMMC1)
+	if (machine_is_atlas())
+		hsmmc1_platdata.built_in = 1;
+	s3c_sdhci1_set_platdata(&hsmmc1_platdata);
 #endif
 #if defined(CONFIG_S3C_DEV_HSMMC2)
 	if (machine_is_atlas() || machine_is_herring()) {
