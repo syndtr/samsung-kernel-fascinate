@@ -354,14 +354,16 @@ static unsigned int s3c24xx_serial_get_mctrl(struct uart_port *port)
 static void s3c24xx_serial_set_mctrl(struct uart_port *port, unsigned int mctrl)
 {
 	/* todo - possibly remove AFC and do manual CTS */
-	unsigned int umcon = 0;
-	umcon = rd_regl(port, S3C2410_UMCON);
-	if (mctrl & TIOCM_RTS)
-		umcon |= S3C2410_UMCOM_AFC;
-	else
-		umcon &= ~S3C2410_UMCOM_AFC;
-
-	wr_regl(port, S3C2410_UMCON, umcon);
+	if(port->line == 0) {
+		unsigned int umcon = 0;
+		umcon = rd_regl(port, S3C2410_UMCON);
+		if (mctrl & TIOCM_RTS)
+			umcon |= S3C2410_UMCOM_AFC;
+		else
+			umcon &= ~S3C2410_UMCOM_AFC;
+	
+		wr_regl(port, S3C2410_UMCON, umcon);
+	}
 }
 
 static void s3c24xx_serial_break_ctl(struct uart_port *port, int break_state)
@@ -692,7 +694,7 @@ static void s3c24xx_serial_set_termios(struct uart_port *port,
 	 * Ask the core to calculate the divisor for us.
 	 */
 
-	baud = uart_get_baud_rate(port, termios, old, 0, 3000000);
+	baud = uart_get_baud_rate(port, termios, old, 0, 115200*8);
 
 	if (baud == 38400 && (port->flags & UPF_SPD_MASK) == UPF_SPD_CUST)
 		quot = port->custom_divisor;

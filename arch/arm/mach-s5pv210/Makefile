@@ -31,8 +31,23 @@ obj-$(CONFIG_MACH_HERRING)	+= herring-btlpm.o
 obj-$(CONFIG_MACH_HERRING)	+= herring-watchdog.o
 obj-$(CONFIG_MACH_HERRING)	+= herring-panel.o
 obj-$(CONFIG_MACH_HERRING)	+= herring-touchkey-led.o
-
 obj-$(CONFIG_MACH_HERRING)	+= dev-herring-phone.o
+
+# atlas support
+
+obj-$(CONFIG_MACH_ATLAS)	+= mach-atlas.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-rfkill.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-wifi.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-btlpm.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-watchdog.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-panel.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-max8998.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-fimc.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-switch.o
+#obj-$(CONFIG_MACH_ATLAS)	+= max8893_consumer.o
+ifeq ($(CONFIG_S5PC110_DEV_ONENAND),y)
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-onenand.o
+endif
 
 obj-$(CONFIG_CPU_FREQ)		+= cpu-freq.o
 obj-$(CONFIG_S5PV210_SETUP_SDHCI)       += setup-sdhci.o

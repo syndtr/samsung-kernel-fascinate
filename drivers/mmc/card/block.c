@@ -271,6 +271,7 @@ static int mmc_blk_issue_rq(struct mmc_queue *mq, struct request *req)
 	struct mmc_card *card = md->queue.card;
 	struct mmc_blk_request brq;
 	int ret = 1, disable_multi = 0;
+	int errorCount = 0;
 
 #ifdef CONFIG_MMC_BLOCK_DEFERRED_RESUME
 	if (mmc_bus_needs_resume(card->host)) {
@@ -413,6 +414,7 @@ static int mmc_blk_issue_rq(struct mmc_queue *mq, struct request *req)
 			       req->rq_disk->disk_name, brq.data.error,
 			       (unsigned)blk_rq_pos(req),
 			       (unsigned)blk_rq_sectors(req), status);
+			       errorCount++;
 		}
 
 		if (brq.stop.error) {
@@ -462,7 +464,13 @@ static int mmc_blk_issue_rq(struct mmc_queue *mq, struct request *req)
 				spin_lock_irq(&md->lock);
 				ret = __blk_end_request(req, -EIO, brq.data.blksz);
 				spin_unlock_irq(&md->lock);
-				continue;
+				if(ret && errorCount>15)
+				{
+					ret = 0;//set to false as we need to break
+					break;
+				}
+				else
+					continue;
 			}
 			else {
 				if(brq.data.error == -EILSEQ) {

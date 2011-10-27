@@ -317,6 +317,7 @@ static int mmc_init_card(struct mmc_host *host, u32 ocr,
 	struct mmc_card *card;
 	int err;
 	u32 cid[4];
+        u32 rocr[1];
 	unsigned int max_dtr;
 
 	BUG_ON(!host);
@@ -331,7 +332,7 @@ static int mmc_init_card(struct mmc_host *host, u32 ocr,
 	mmc_go_idle(host);
 
 	/* The extra bit indicates that we support high capacity */
-	err = mmc_send_op_cond(host, ocr | (1 << 30), NULL);
+        err = mmc_send_op_cond(host, ocr | (1 << 30), rocr);
 	if (err)
 		goto err;
 
@@ -420,6 +421,8 @@ static int mmc_init_card(struct mmc_host *host, u32 ocr,
 		err = mmc_read_ext_csd(card);
 		if (err)
 			goto free_card;
+                if (rocr[0] & 0x40000000)
+                        mmc_card_set_blockaddr(card);
 	}
 
 	/*
