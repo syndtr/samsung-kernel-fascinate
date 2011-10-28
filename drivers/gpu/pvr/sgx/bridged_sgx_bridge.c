@@ -1149,7 +1149,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		return 0;
 	}
 
-	printk("hdl 1\n");
 	psSGXDevInitPart2OUT->eError =
 		PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDevCookieInt,
@@ -1160,7 +1159,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		return 0;
 	}
 
-	printk("hdl 2\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelCCBMemInfo,
@@ -1170,7 +1168,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		bLookupFailed = IMG_TRUE;
 	}
 
-	printk("hdl 3\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelCCBCtlMemInfo,
@@ -1180,7 +1177,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		bLookupFailed = IMG_TRUE;
 	}
 
-	printk("hdl 4\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelCCBEventKickerMemInfo,
@@ -1190,7 +1186,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		bLookupFailed = IMG_TRUE;
 	}
 
-	printk("hdl 5\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelSGXHostCtlMemInfo,
@@ -1200,7 +1195,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		bLookupFailed = IMG_TRUE;
 	}
 
-	printk("hdl 6\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelSGXTA3DCtlMemInfo,
@@ -1210,7 +1204,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		bLookupFailed = IMG_TRUE;
 	}
 
-	printk("hdl 7\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelSGXMiscMemInfo,
@@ -1221,7 +1214,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	}
 
 #if defined(SGX_SUPPORT_HWPROFILING)
-	printk("hdl 8\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelHWProfilingMemInfo,
@@ -1233,7 +1225,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 #endif
 
 #if defined(SUPPORT_SGX_HWPERF)
-	printk("hdl 9\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelHWPerfCBMemInfo,
@@ -1244,7 +1235,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	}
 #endif
 
-	printk("hdl 10\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 								&hDummy,
 								psSGXDevInitPart2IN->sInitInfo.hKernelTASigBufferMemInfo,
@@ -1254,7 +1244,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		bLookupFailed = IMG_TRUE;
 	}
 
-	printk("hdl 11\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 								&hDummy,
 								psSGXDevInitPart2IN->sInitInfo.hKernel3DSigBufferMemInfo,
@@ -1265,7 +1254,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	}
 
 #if defined(FIX_HW_BRN_29702)
-	printk("hdl 12\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelCFIMemInfo,
@@ -1277,7 +1265,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 #endif
 
 #if defined(FIX_HW_BRN_29823)
-	printk("hdl 13\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelDummyTermStreamMemInfo,
@@ -1290,7 +1277,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 
 
 #if defined(FIX_HW_BRN_31542)
-	printk("hdl 14\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWAVDMStreamMemInfo,
@@ -1299,7 +1285,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	{
 		bLookupFailed = IMG_TRUE;
 	}
-	printk("hdl 15\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWAIndexStreamMemInfo,
@@ -1308,7 +1293,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	{
 		bLookupFailed = IMG_TRUE;
 	}
-	printk("hdl 16\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWAPDSMemInfo,
@@ -1317,7 +1301,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	{
 		bLookupFailed = IMG_TRUE;
 	}
-	printk("hdl 1\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWAUSEMemInfo,
@@ -1326,7 +1309,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	{
 		bLookupFailed = IMG_TRUE;
 	}
-	printk("hdl 1\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWAParamMemInfo,
@@ -1335,7 +1317,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	{
 		bLookupFailed = IMG_TRUE;
 	}
-	printk("hdl 1\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWAPMPTMemInfo,
@@ -1344,7 +1325,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	{
 		bLookupFailed = IMG_TRUE;
 	}
-	printk("hdl 1\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWATPCMemInfo,
@@ -1353,7 +1333,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 	{
 		bLookupFailed = IMG_TRUE;
 	}
-	printk("hdl 1\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelClearClipWAPSGRgnHdrMemInfo,
@@ -1365,7 +1344,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 #endif
 
 #if defined(SGX_FEATURE_VDM_CONTEXT_SWITCH) && defined(FIX_HW_BRN_31425)
-	printk("hdl 17\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelVDMSnapShotBufferMemInfo,
@@ -1375,7 +1353,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 		bLookupFailed = IMG_TRUE;
 	}
 
-	printk("hdl 1\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelVDMCtrlStreamBufferMemInfo,
@@ -1387,7 +1364,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 #endif
 
 #if defined(PVRSRV_USSE_EDM_STATUS_DEBUG)
-	printk("hdl 18\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelEDMStatusBufferMemInfo,
@@ -1399,7 +1375,6 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 #endif
 
 #if defined(SGX_FEATURE_SPM_MODE_0)
-	printk("hdl 19\n");
 	eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 						   &hDummy,
 						   psSGXDevInitPart2IN->sInitInfo.hKernelTmpDPMStateMemInfo,
@@ -1427,8 +1402,7 @@ SGXDevInitPart2BW(IMG_UINT32 ui32BridgeID,
 			continue;
 		}
 
-		printk("hdl 20\n");
-		eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
+			eError = PVRSRVLookupHandle(psPerProc->psHandleBase,
 							   &hDummy,
 							   hHandle,
 							   PVRSRV_HANDLE_TYPE_MEM_INFO);
