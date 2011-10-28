@@ -365,7 +365,6 @@ static struct regulator_init_data atlas_buck4_data = {
 	.consumer_supplies	= buck4_consumer,
 };
 
-
 static struct regulator_init_data atlas_esafeout2_data = {
 	.constraints    = {
 		.name		= "ESAFEOUT2",
