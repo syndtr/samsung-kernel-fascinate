@@ -36,9 +36,11 @@ obj-$(CONFIG_MACH_HERRING)	+= dev-herring-phone.o
 # atlas support
 
 obj-$(CONFIG_MACH_ATLAS)	+= mach-atlas.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-gpio.o
 obj-$(CONFIG_MACH_ATLAS)	+= atlas-rfkill.o
 obj-$(CONFIG_MACH_ATLAS)	+= atlas-wifi.o
 obj-$(CONFIG_MACH_ATLAS)	+= atlas-btlpm.o
+obj-$(CONFIG_MACH_ATLAS)	+= atlas-vibrator.o
 obj-$(CONFIG_MACH_ATLAS)	+= atlas-watchdog.o
 obj-$(CONFIG_MACH_ATLAS)	+= atlas-panel.o
 obj-$(CONFIG_MACH_ATLAS)	+= atlas-max8998.o

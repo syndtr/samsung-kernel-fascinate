@@ -1,4 +1,4 @@
-/* aries-watchdog.c
+/* atlas-watchdog.c
  *
  * Copyright (C) 2010 Google, Inc.
  *

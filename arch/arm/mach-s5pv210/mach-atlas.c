@@ -1403,7 +1403,7 @@ static void __init atlas_machine_init(void)
 	printk(KERN_INFO "system_rev is 0x%x\n", system_rev);
 	
 	/*initialise the gpio's*/
-	config_init_gpio();
+	atlas_init_gpio();
 
 #ifdef CONFIG_ANDROID_PMEM
 	android_pmem_set_platdata();

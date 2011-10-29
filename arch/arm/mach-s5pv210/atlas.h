@@ -10,6 +10,8 @@
 
 struct uart_port;
 
+void atlas_init_gpio(void);
+
 void atlas_fimc_init(void);
 void atlas_panel_init(void);
 void aries_bt_uart_wake_peer(struct uart_port *port);
@@ -27,7 +29,7 @@ void max8998_init(void);
 #ifdef __LINUX_MTD_ONENAND_H
 void s5pc110_onenand_set_platdata(struct onenand_platform_data *pdata);
 #endif
-void onenand_init();
+void onenand_init(void);
 
 extern struct class *sec_class;
 void fsa9480_init(void);
