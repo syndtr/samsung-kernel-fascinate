@@ -1,0 +1,16 @@
+on early-fs
+    mkdir /tmp
+
+    mkdir /sdcard 0000 system system
+    symlink /sdcard /mnt/sdcard
+
+on post-fs
+    mkdir /cache/recovery
+    chown system cache /cache/recovery
+    chmod 0770 /cache/recovery
+
+on boot
+    write /param/recovery 0
+
+service recovery /sbin/recovery
+    class main

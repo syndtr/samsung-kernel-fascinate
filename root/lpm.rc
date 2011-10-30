@@ -1,0 +1,13 @@
+
+on fs
+    mount yaffs2 mtd@system /system
+
+service playlpm /system/bin/playlpm
+    class main
+    user root
+    oneshot
+
+service lpmkey /system/bin/charging_mode
+    class main
+    user root
+    oneshot
