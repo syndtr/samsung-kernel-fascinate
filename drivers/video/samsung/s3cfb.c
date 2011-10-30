@@ -39,6 +39,10 @@
 #endif
 #include "s3cfb.h"
 
+#include "logo_rgb24_wvga_portrait.h"
+
+#define BOOT_FB_WINDOW	0
+
 struct s3c_platform_fb *to_fb_plat(struct device *dev)
 {
 	struct platform_device *pdev = to_platform_device(dev);
@@ -91,6 +95,9 @@ static int s3cfb_draw_logo(struct fb_info *fb)
 		}
 	}
 #endif
+#ifdef CONFIG_MACH_ATLAS
+	memcpy(fb->screen_base, LOGO_RGB24, fb->var.yres * fb->fix.line_length);
+#else
 	if (bootloaderfb) {
 		u8 *logo_virt_buf;
 		logo_virt_buf = ioremap_nocache(bootloaderfb,
@@ -100,6 +107,7 @@ static int s3cfb_draw_logo(struct fb_info *fb)
 				fb->var.yres * fb->fix.line_length);
 		iounmap(logo_virt_buf);
 	}
+#endif
 	return 0;
 }
 #endif
@@ -839,7 +847,7 @@ static int s3cfb_register_framebuffer(struct s3cfb_global *ctrl)
 				goto err_register_fb;
 			}
 #ifndef CONFIG_FRAMEBUFFER_CONSOLE
-#ifdef CONFIG_MACH_ATLAS
+#if defined(CONFIG_MACH_ATLAS) && 0
                         /*ugly workaround for bootpixels on SGS*/
 			if (j == 0) {
 				s3cfb_check_var(&ctrl->fb[j]->var, ctrl->fb[j]);
@@ -856,7 +864,6 @@ static int s3cfb_register_framebuffer(struct s3cfb_global *ctrl)
 				s3cfb_check_var(&ctrl->fb[j]->var, ctrl->fb[j]);
 				s3cfb_set_par(ctrl->fb[j]);
 				s3cfb_draw_logo(ctrl->fb[j]);
-
 			}
 #endif
 #endif
@@ -1026,6 +1033,12 @@ static int __devinit s3cfb_probe(struct platform_device *pdev)
 	}
 
 	s3cfb_set_clock(fbdev);
+
+	if (pdata->default_win != BOOT_FB_WINDOW) {
+		dev_warn(fbdev->dev, "closing bootloader FIMD window %d\n", BOOT_FB_WINDOW);
+		s3cfb_set_window(fbdev, BOOT_FB_WINDOW, 0);		
+	}
+
 	s3cfb_set_window(fbdev, pdata->default_win, 1);
 
 	s3cfb_display_on(fbdev);
