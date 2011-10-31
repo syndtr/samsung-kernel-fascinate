@@ -9,7 +9,7 @@ on early-fs
 
 on fs
     mount yaffs2 mtd@system /system
-    mount ext4 /dev/block/mmcblk0p2 /data wait nosuid nodev noatime nodiratime noauto_da_alloc nobarrier commit=500
+    mount ext4 /dev/block/mmcblk0p1 /data wait nosuid nodev noatime nodiratime noauto_da_alloc nobarrier commit=500
     mount yaffs2 mtd@datadata /datadata
     mount yaffs2 mtd@efs /efs
 

@@ -4,7 +4,7 @@ on early-init
 on param-init
     loglevel 9
     mkdir /param 0755 root root
-    mount ext4 /dev/block/mmcblk0p1 /param
+    mount ext4 /dev/block/mmcblk0p2 /param
 
 on init
     sysclktz 0
